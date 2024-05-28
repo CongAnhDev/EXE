@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Button, Image, Form } from 'react-bootstrap';
+import { Container, Row, Col, Button, Image, Form, Modal } from 'react-bootstrap';
 
 const WorkshopDetail = () => {
     const workshop = {
@@ -16,6 +16,7 @@ const WorkshopDetail = () => {
 
     const [ticketQuantity, setTicketQuantity] = useState(1);
     const [totalPrice, setTotalPrice] = useState(workshop.ticketPrice);
+    const [showModal, setShowModal] = useState(false);
 
     const handleIncrease = () => {
         setTicketQuantity(ticketQuantity + 1);
@@ -28,6 +29,9 @@ const WorkshopDetail = () => {
             setTotalPrice((ticketQuantity - 1) * workshop.ticketPrice);
         }
     };
+
+    const handleShowModal = () => setShowModal(true);
+    const handleCloseModal = () => setShowModal(false);
 
     return (
         <Container fluid>
@@ -65,7 +69,7 @@ const WorkshopDetail = () => {
                     </Row>
                     <p className="text-center">Tổng số tiền: {totalPrice.toLocaleString()} VND</p>
                     <div className="text-center">
-                        <Button href='/bankticket' variant="primary">Mua vé</Button>
+                        <Button variant="primary" onClick={handleShowModal}>Mua vé</Button>
                     </div>
                 </Col>
             </Row>
@@ -73,7 +77,6 @@ const WorkshopDetail = () => {
                 <Col xs="auto">
                     <h2 className="text-center">Ban tổ chức</h2>
                     <div className="d-flex flex-column align-items-center">
-                        <Image src={workshop.organizerLogo} roundedCircle style={{ width: '100px', height: '100px', marginBottom: '20px' }} />
                         <div className="text-center">
                             <h4>{workshop.organizerName}</h4>
                             <p>{workshop.organizerInfo}</p>
@@ -81,6 +84,23 @@ const WorkshopDetail = () => {
                     </div>
                 </Col>
             </Row>
+
+            <Modal show={showModal} onHide={handleCloseModal}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Thông tin thanh toán</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <div className="text-center">
+                        <p>Số lượng vé: {ticketQuantity}</p>
+                        <p>Tổng số tiền: {totalPrice.toLocaleString()} VND</p>
+                        <p>Vui lòng quét mã QR để thanh toán:</p>
+                        <Image src="https://via.placeholder.com/200x200" fluid />
+                    </div>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCloseModal}>Đóng</Button>
+                </Modal.Footer>
+            </Modal>
         </Container>
     );
 };

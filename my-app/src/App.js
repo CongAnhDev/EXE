@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import Home from './components/LandingPage';
 import Login from './components/Login';
@@ -9,15 +8,13 @@ import ThuCong from './components/ThuCong';
 import LamBanh from './components/LamBanh';
 import Other from './components/Other';
 import CreateEvent from './components/CreateEvent';
-import TimeTicket from './components/TimeTicket';
-import Bankinfo from './components/Bankinfo';
-import Workshopdetail from './components/Workshopdetail';
-import Bankticket from './components/Bankticket';
+// import Workshopdetail from './components/Workshopdetail';
 import Homepage from './components/Homepage';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navigation from "./Nav";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Test from "./components/test";
+import WorkshopList from "./components/WorkshopList";
+import Detail from "./components/Detail";
 
 export default function App() {
   return (
@@ -35,13 +32,12 @@ export default function App() {
           <Route path="/lambanh" element={<LamBanh />} />
           <Route path="/Other" element={<Other />} />
           <Route path="/event" element={<CreateEvent />} />
-          <Route path="/time" element={<TimeTicket />} />
-          <Route path="/bankinfo" element={<Bankinfo />} />
-          <Route path="/detail" element={<Workshopdetail />} />
-          <Route path="/bankticket" element={<Bankticket />} />
+          {/* <Route path="/detail" element={<Workshopdetail />} /> */}
+
+          <Route path="/detail/:id" element={<Detail />} />
+          <Route path="/test" element={<WorkshopList />} />
 
 
-          <Route path="/test" element={<Test />} />
 
 
 

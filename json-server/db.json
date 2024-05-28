@@ -1,29 +1,29 @@
 {
-  "Chat": [
-    {
-      "id": "room1",
-      "name": "Demo Chat",
-      "participants": ["user1", "user2"],
-      "messages": [
-        {
-          "id": "message1",
-          "text": "Hi Bob, how are you?",
-          "senderId": "user1",
-          "timestamp": "09-04-2024 09:00:00 PM"
-        },
-        {
-          "id": "message2",
-          "text": "Hey Alice, I'm good! How about you?",
-          "senderId": "user2",
-          "timestamp": "09-04-2024 09:01:00 PM"
-        },
-        {
-          "id": "message3",
-          "text": "I'm doing well, thanks for asking!",
-          "senderId": "user1",
-          "timestamp": "09-04-2024 09:02:00 PM"
-        }
-      ]
-    }
-  ]
+  "workshop": {
+    "id": 1,
+    "workshopName": "Introduction to Flower Arrangement",
+    "workshopType": "offline",
+    "location": "Community Center, Main Street",
+    "city": "Hanoi",
+    "district": "Hoan Kiem",
+    "ward": "Ly Thai To",
+    "streetAddress": "123 Le Thai To Street",
+    "category": "Cắm Hoa",
+    "workshopInfo": "This workshop will cover the basics of flower arrangement.",
+    "workshopImage": "url/to/logo.png",
+    "organizerName": "Flower Arrangers Association",
+    "organizerInfo": "We are a group dedicated to the art of flower arrangement.",
+    "tickets": [
+      {
+        "workshopStart": "2023-06-15T09:00:00Z",
+        "workshopEnd": "2023-06-15T12:00:00Z",
+        "ticketName": "Early Bird Ticket",
+        "ticketPrice": 50.00,
+        "totalTickets": 100,
+        "saleStart": "2023-05-01T00:00:00Z",
+        "saleEnd": "2023-06-14T23:59:59Z",
+        "ticketInfo": "Early bird ticket offers a 20% discount."
+      }
+    ]
+  }
 }

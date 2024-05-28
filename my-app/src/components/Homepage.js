@@ -1,14 +1,21 @@
-import React from 'react';
-import { Carousel } from 'react-bootstrap';
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Card from 'react-bootstrap/Card';
-import CardGroup from 'react-bootstrap/CardGroup';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { Carousel, Card, Button, CardGroup, Container, Row, Col, CardBody, CardImg, CardTitle, CardText } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link } from 'react-router-dom';
 
+const Home = () => {
+    const [workshops, setWorkshops] = useState([]);
 
-const HomeAccount = () => {
+    useEffect(() => {
+        axios.get('http://localhost:8080/workshop')
+            .then(response => {
+                setWorkshops(response.data.data);
+            })
+            .catch(error => {
+                console.error('There was an error fetching the workshops!', error);
+            });
+    }, []);
     return (
         <>
             <Carousel>
@@ -18,38 +25,47 @@ const HomeAccount = () => {
                         src="./Images/TBTS-DHFPT-2024-bannerweb.png"
                         alt="First slide"
                     />
-                    <Carousel.Caption>
-                        <h3>First Slide Label</h3>
-                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                    </Carousel.Caption>
                 </Carousel.Item>
-
                 <Carousel.Item>
                     <img
                         className="d-block w-100"
                         src="./Images/Hocbong-100-e-bannerweb.png"
                         alt="Second slide"
                     />
-
-                    <Carousel.Caption>
-                        <h3>Second Slide Label</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    </Carousel.Caption>
                 </Carousel.Item>
-
                 <Carousel.Item>
                     <img
                         className="d-block w-100"
                         src="./Images/TBTS-DHFPT-2024-bannerweb.png"
                         alt="Third slide"
                     />
-
-                    <Carousel.Caption>
-                        <h3>Third Slide Label</h3>
-                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-                    </Carousel.Caption>
                 </Carousel.Item>
             </Carousel>
+
+            <h1 className="my-4">List of Workshops</h1>
+            <Row>
+                {workshops.length === 0 ? (
+                    <p>No workshops available</p>
+                ) : (
+                    workshops.map(workshop => (
+                        <Col sm="12" md="6" lg="4" key={workshop.idWorkshop} className="mb-4">
+                            <Card>
+                                <CardImg variant="top" src={`http://localhost:8080/image/path/${workshop.imageWorkshop.split('\\').pop()}`} alt={workshop.nameWorkshop} />
+                                <Card.Body>
+                                    <Card.Title>{workshop.nameWorkshop}</Card.Title>
+                                    <Card.Text>
+                                        từ {workshop.descriptionWorkshop}
+                                    </Card.Text>
+                                    <Button as={Link} to={`/detail/${workshop.idWorkshop}`} variant="primary">Detail</Button>
+                                </Card.Body>
+                                <Card.Footer>
+                                    <small className="text-muted">{workshop.timeWorkshop}</small>
+                                </Card.Footer>
+                            </Card>
+                        </Col>
+                    ))
+                )}
+            </Row>
 
             <div style={{ paddingTop: '20px' }}>
                 <h1>Hội Họa</h1>
@@ -57,62 +73,58 @@ const HomeAccount = () => {
 
             <CardGroup style={{ justifyContent: 'center', gap: '20px' }}>
                 <Card>
-                    <Card.Img variant="top" src="holder.js/100px160" />
+                    <Card.Img variant="top" src="./Images/art1.jpg" />
                     <Card.Body>
-                        <Card.Title>Card title</Card.Title>
+                        <Card.Title>Workshop Vẽ Tranh</Card.Title>
                         <Card.Text>
-                            This is a wider card with supporting text below as a natural lead-in
-                            to additional content. This content is a little bit longer.
+                            từ 350.000 đ
                         </Card.Text>
+                        <Button variant="primary">Detail</Button>
                     </Card.Body>
                     <Card.Footer>
-                        <small className="text-muted">Last updated 3 mins ago</small>
+                        <small className="text-muted">24 tháng 7, 2024</small>
                     </Card.Footer>
                 </Card>
-
                 <Card>
-                    <Card.Img variant="top" src="holder.js/100px160" />
+                    <Card.Img variant="top" src="./Images/art2.jpg" />
                     <Card.Body>
-                        <Card.Title>Card title</Card.Title>
+                        <Card.Title>Workshop Vẽ Tranh</Card.Title>
                         <Card.Text>
-                            This is a wider card with supporting text below as a natural lead-in
-                            to additional content. This content is a little bit longer.
+                            từ 360.000 đ
                         </Card.Text>
+                        <Button variant="primary">Detail</Button>
                     </Card.Body>
                     <Card.Footer>
-                        <small className="text-muted">Last updated 3 mins ago</small>
+                        <small className="text-muted">14 tháng 7, 2024</small>
                     </Card.Footer>
                 </Card>
-
                 <Card>
-                    <Card.Img variant="top" src="holder.js/100px160" />
+                    <Card.Img variant="top" src="./Images/art1.jpg" />
                     <Card.Body>
-                        <Card.Title>Card title</Card.Title>
+                        <Card.Title>Workshop Vẽ Tranh</Card.Title>
                         <Card.Text>
-                            This is a wider card with supporting text below as a natural lead-in
-                            to additional content. This content is a little bit longer.
+                            từ 200.000 đ
                         </Card.Text>
+                        <Button variant="primary">Detail</Button>
                     </Card.Body>
                     <Card.Footer>
-                        <small className="text-muted">Last updated 3 mins ago</small>
+                        <small className="text-muted">22 tháng 7, 2024</small>
                     </Card.Footer>
                 </Card>
-
                 <Card>
-                    <Card.Img variant="top" src="holder.js/100px160" />
+                    <Card.Img variant="top" src="./Images/art2.jpg" />
                     <Card.Body>
-                        <Card.Title>Card title</Card.Title>
+                        <Card.Title>Workshop Vẽ Tranh</Card.Title>
                         <Card.Text>
-                            This is a wider card with supporting text below as a natural lead-in
-                            to additional content. This content is a little bit longer.
+                            từ 340.000 đ
                         </Card.Text>
+                        <Button variant="primary">Detail</Button>
                     </Card.Body>
                     <Card.Footer>
-                        <small className="text-muted">Last updated 3 mins ago</small>
+                        <small className="text-muted">11 tháng 7, 2024</small>
                     </Card.Footer>
                 </Card>
             </CardGroup>
-
 
             <div style={{ paddingTop: '20px' }}>
                 <h1>Cắm Hoa</h1>
@@ -120,61 +132,59 @@ const HomeAccount = () => {
 
             <CardGroup style={{ justifyContent: 'center', gap: '20px' }}>
                 <Card>
-                    <Card.Img variant="top" src="holder.js/100px160" />
+                    <Card.Img variant="top" src="./Images/hoa1.jpg" />
                     <Card.Body>
-                        <Card.Title>Card title</Card.Title>
+                        <Card.Title>Workshop Cắm Hoa</Card.Title>
                         <Card.Text>
-                            This is a wider card with supporting text below as a natural lead-in
-                            to additional content. This content is a little bit longer.
+                            từ 350.000 đ
                         </Card.Text>
+                        <Button variant="primary">Detail</Button>
                     </Card.Body>
                     <Card.Footer>
-                        <small className="text-muted">Last updated 3 mins ago</small>
+                        <small className="text-muted">24 tháng 7, 2024</small>
                     </Card.Footer>
                 </Card>
-
                 <Card>
-                    <Card.Img variant="top" src="holder.js/100px160" />
+                    <Card.Img variant="top" src="./Images/hoa2.jpg" />
                     <Card.Body>
-                        <Card.Title>Card title</Card.Title>
+                        <Card.Title>Workshop Cắm Hoa</Card.Title>
                         <Card.Text>
-                            This is a wider card with supporting text below as a natural lead-in
-                            to additional content. This content is a little bit longer.
+                            từ 360.000 đ
                         </Card.Text>
+                        <Button variant="primary">Detail</Button>
                     </Card.Body>
                     <Card.Footer>
-                        <small className="text-muted">Last updated 3 mins ago</small>
+                        <small className="text-muted">14 tháng 7, 2024</small>
                     </Card.Footer>
                 </Card>
-
                 <Card>
-                    <Card.Img variant="top" src="holder.js/100px160" />
+                    <Card.Img variant="top" src="./Images/hoa1.jpg" />
                     <Card.Body>
-                        <Card.Title>Card title</Card.Title>
+                        <Card.Title>Workshop Cắm Hoa</Card.Title>
                         <Card.Text>
-                            This is a wider card with supporting text below as a natural lead-in
-                            to additional content. This content is a little bit longer.
+                            từ 200.000 đ
                         </Card.Text>
+                        <Button variant="primary">Detail</Button>
                     </Card.Body>
                     <Card.Footer>
-                        <small className="text-muted">Last updated 3 mins ago</small>
+                        <small className="text-muted">22 tháng 7, 2024</small>
                     </Card.Footer>
                 </Card>
-
                 <Card>
-                    <Card.Img variant="top" src="holder.js/100px160" />
+                    <Card.Img variant="top" src="./Images/hoa2.jpg" />
                     <Card.Body>
-                        <Card.Title>Card title</Card.Title>
+                        <Card.Title>Workshop Cắm Hoa</Card.Title>
                         <Card.Text>
-                            This is a wider card with supporting text below as a natural lead-in
-                            to additional content. This content is a little bit longer.
+                            từ 340.000 đ
                         </Card.Text>
+                        <Button variant="primary">Detail</Button>
                     </Card.Body>
                     <Card.Footer>
-                        <small className="text-muted">Last updated 3 mins ago</small>
+                        <small className="text-muted">11 tháng 7, 2024</small>
                     </Card.Footer>
                 </Card>
             </CardGroup>
+
 
             <div style={{ paddingTop: '20px' }}>
                 <h1>Thủ Công</h1>
@@ -182,62 +192,58 @@ const HomeAccount = () => {
 
             <CardGroup style={{ justifyContent: 'center', gap: '20px' }}>
                 <Card>
-                    <Card.Img variant="top" src="holder.js/100px160" />
+                    <Card.Img variant="top" src="./Images/cong1.jpg" />
                     <Card.Body>
-                        <Card.Title>Card title</Card.Title>
+                        <Card.Title>Workshop Thủ Công</Card.Title>
                         <Card.Text>
-                            This is a wider card with supporting text below as a natural lead-in
-                            to additional content. This content is a little bit longer.
+                            từ 350.000 đ
                         </Card.Text>
+                        <Button variant="primary">Detail</Button>
                     </Card.Body>
                     <Card.Footer>
-                        <small className="text-muted">Last updated 3 mins ago</small>
+                        <small className="text-muted">24 tháng 7, 2024</small>
                     </Card.Footer>
                 </Card>
-
                 <Card>
-                    <Card.Img variant="top" src="holder.js/100px160" />
+                    <Card.Img variant="top" src="./Images/cong2.jpg" />
                     <Card.Body>
-                        <Card.Title>Card title</Card.Title>
+                        <Card.Title>Workshop Thủ Công</Card.Title>
                         <Card.Text>
-                            This is a wider card with supporting text below as a natural lead-in
-                            to additional content. This content is a little bit longer.
+                            từ 360.000 đ
                         </Card.Text>
+                        <Button variant="primary">Detail</Button>
                     </Card.Body>
                     <Card.Footer>
-                        <small className="text-muted">Last updated 3 mins ago</small>
+                        <small className="text-muted">14 tháng 7, 2024</small>
                     </Card.Footer>
                 </Card>
-
                 <Card>
-                    <Card.Img variant="top" src="holder.js/100px160" />
+                    <Card.Img variant="top" src="./Images/cong1.jpg" />
                     <Card.Body>
-                        <Card.Title>Card title</Card.Title>
+                        <Card.Title>Workshop Thủ Công</Card.Title>
                         <Card.Text>
-                            This is a wider card with supporting text below as a natural lead-in
-                            to additional content. This content is a little bit longer.
+                            từ 200.000 đ
                         </Card.Text>
+                        <Button variant="primary">Detail</Button>
                     </Card.Body>
                     <Card.Footer>
-                        <small className="text-muted">Last updated 3 mins ago</small>
+                        <small className="text-muted">22 tháng 7, 2024</small>
                     </Card.Footer>
                 </Card>
-
                 <Card>
-                    <Card.Img variant="top" src="holder.js/100px160" />
+                    <Card.Img variant="top" src="./Images/cong2.jpg" />
                     <Card.Body>
-                        <Card.Title>Card title</Card.Title>
+                        <Card.Title>Workshop Thủ Công</Card.Title>
                         <Card.Text>
-                            This is a wider card with supporting text below as a natural lead-in
-                            to additional content. This content is a little bit longer.
+                            từ 340.000 đ
                         </Card.Text>
+                        <Button variant="primary">Detail</Button>
                     </Card.Body>
                     <Card.Footer>
-                        <small className="text-muted">Last updated 3 mins ago</small>
+                        <small className="text-muted">11 tháng 7, 2024</small>
                     </Card.Footer>
                 </Card>
             </CardGroup>
-
 
             <div style={{ paddingTop: '20px' }}>
                 <h1>Làm Bánh</h1>
@@ -245,125 +251,119 @@ const HomeAccount = () => {
 
             <CardGroup style={{ justifyContent: 'center', gap: '20px' }}>
                 <Card>
-                    <Card.Img variant="top" src="holder.js/100px160" />
+                    <Card.Img variant="top" src="./Images/banh1.jpg" />
                     <Card.Body>
-                        <Card.Title>Card title</Card.Title>
+                        <Card.Title>Workshop Thủ Công</Card.Title>
                         <Card.Text>
-                            This is a wider card with supporting text below as a natural lead-in
-                            to additional content. This content is a little bit longer.
+                            từ 350.000 đ
                         </Card.Text>
+                        <Button variant="primary">Detail</Button>
                     </Card.Body>
                     <Card.Footer>
-                        <small className="text-muted">Last updated 3 mins ago</small>
+                        <small className="text-muted">24 tháng 7, 2024</small>
                     </Card.Footer>
                 </Card>
-
                 <Card>
-                    <Card.Img variant="top" src="holder.js/100px160" />
+                    <Card.Img variant="top" src="./Images/banh2.jpg" />
                     <Card.Body>
-                        <Card.Title>Card title</Card.Title>
+                        <Card.Title>Workshop Thủ Công</Card.Title>
                         <Card.Text>
-                            This is a wider card with supporting text below as a natural lead-in
-                            to additional content. This content is a little bit longer.
+                            từ 360.000 đ
                         </Card.Text>
+                        <Button variant="primary">Detail</Button>
                     </Card.Body>
                     <Card.Footer>
-                        <small className="text-muted">Last updated 3 mins ago</small>
+                        <small className="text-muted">14 tháng 7, 2024</small>
                     </Card.Footer>
                 </Card>
-
                 <Card>
-                    <Card.Img variant="top" src="holder.js/100px160" />
+                    <Card.Img variant="top" src="./Images/banh1.jpg" />
                     <Card.Body>
-                        <Card.Title>Card title</Card.Title>
+                        <Card.Title>Workshop Thủ Công</Card.Title>
                         <Card.Text>
-                            This is a wider card with supporting text below as a natural lead-in
-                            to additional content. This content is a little bit longer.
+                            từ 200.000 đ
                         </Card.Text>
+                        <Button variant="primary">Detail</Button>
                     </Card.Body>
                     <Card.Footer>
-                        <small className="text-muted">Last updated 3 mins ago</small>
+                        <small className="text-muted">22 tháng 7, 2024</small>
                     </Card.Footer>
                 </Card>
-
                 <Card>
-                    <Card.Img variant="top" src="holder.js/100px160" />
+                    <Card.Img variant="top" src="./Images/banh2.jpg" />
                     <Card.Body>
-                        <Card.Title>Card title</Card.Title>
+                        <Card.Title>Workshop Thủ Công</Card.Title>
                         <Card.Text>
-                            This is a wider card with supporting text below as a natural lead-in
-                            to additional content. This content is a little bit longer.
+                            từ 340.000 đ
                         </Card.Text>
+                        <Button variant="primary">Detail</Button>
                     </Card.Body>
                     <Card.Footer>
-                        <small className="text-muted">Last updated 3 mins ago</small>
+                        <small className="text-muted">11 tháng 7, 2024</small>
                     </Card.Footer>
                 </Card>
             </CardGroup>
+
 
             <div style={{ paddingTop: '20px' }}>
                 <h1>Other</h1>
             </div>
 
+
             <CardGroup style={{ justifyContent: 'center', gap: '20px' }}>
                 <Card>
-                    <Card.Img variant="top" src="holder.js/100px160" />
+                    <Card.Img variant="top" src="./Images/other1.jpg" />
                     <Card.Body>
-                        <Card.Title>Card title</Card.Title>
+                        <Card.Title>Workshop</Card.Title>
                         <Card.Text>
-                            This is a wider card with supporting text below as a natural lead-in
-                            to additional content. This content is a little bit longer.
+                            từ 350.000 đ
                         </Card.Text>
+                        <Button variant="primary">Detail</Button>
                     </Card.Body>
                     <Card.Footer>
-                        <small className="text-muted">Last updated 3 mins ago</small>
+                        <small className="text-muted">24 tháng 7, 2024</small>
                     </Card.Footer>
                 </Card>
-
                 <Card>
-                    <Card.Img variant="top" src="holder.js/100px160" />
+                    <Card.Img variant="top" src="./Images/other2.jpg" />
                     <Card.Body>
-                        <Card.Title>Card title</Card.Title>
+                        <Card.Title>Workshop</Card.Title>
                         <Card.Text>
-                            This is a wider card with supporting text below as a natural lead-in
-                            to additional content. This content is a little bit longer.
+                            từ 360.000 đ
                         </Card.Text>
+                        <Button variant="primary">Detail</Button>
                     </Card.Body>
                     <Card.Footer>
-                        <small className="text-muted">Last updated 3 mins ago</small>
+                        <small className="text-muted">14 tháng 7, 2024</small>
                     </Card.Footer>
                 </Card>
-
                 <Card>
-                    <Card.Img variant="top" src="holder.js/100px160" />
+                    <Card.Img variant="top" src="./Images/other1.jpg" />
                     <Card.Body>
-                        <Card.Title>Card title</Card.Title>
+                        <Card.Title>Workshop</Card.Title>
                         <Card.Text>
-                            This is a wider card with supporting text below as a natural lead-in
-                            to additional content. This content is a little bit longer.
+                            từ 200.000 đ
                         </Card.Text>
+                        <Button variant="primary">Detail</Button>
                     </Card.Body>
                     <Card.Footer>
-                        <small className="text-muted">Last updated 3 mins ago</small>
+                        <small className="text-muted">22 tháng 7, 2024</small>
                     </Card.Footer>
                 </Card>
-
                 <Card>
-                    <Card.Img variant="top" src="holder.js/100px160" />
+                    <Card.Img variant="top" src="./Images/other2.jpg" />
                     <Card.Body>
-                        <Card.Title>Card title</Card.Title>
+                        <Card.Title>Workshop</Card.Title>
                         <Card.Text>
-                            This is a wider card with supporting text below as a natural lead-in
-                            to additional content. This content is a little bit longer.
+                            từ 340.000 đ
                         </Card.Text>
+                        <Button variant="primary">Detail</Button>
                     </Card.Body>
                     <Card.Footer>
-                        <small className="text-muted">Last updated 3 mins ago</small>
+                        <small className="text-muted">11 tháng 7, 2024</small>
                     </Card.Footer>
                 </Card>
             </CardGroup>
-
-
 
             <Container fluid style={{ backgroundColor: 'red', color: 'white' }}>
                 <Row>
@@ -372,9 +372,8 @@ const HomeAccount = () => {
                     </Col>
                 </Row>
             </Container>
-
         </>
     );
 }
 
-export default HomeAccount;
+export default Home;

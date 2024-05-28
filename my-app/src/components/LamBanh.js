@@ -1,10 +1,5 @@
 import React from 'react';
-import { Carousel } from 'react-bootstrap';
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Card from 'react-bootstrap/Card';
-import CardGroup from 'react-bootstrap/CardGroup';
+import { Carousel, Card, Button, CardGroup, Container, Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -57,58 +52,55 @@ const LamBanh = () => {
 
             <CardGroup style={{ justifyContent: 'center', gap: '20px' }}>
                 <Card>
-                    <Card.Img variant="top" src="holder.js/100px160" />
+                    <Card.Img variant="top" src="./Images/banh1.jpg" />
                     <Card.Body>
-                        <Card.Title>Card title</Card.Title>
+                        <Card.Title>Workshop Thủ Công</Card.Title>
                         <Card.Text>
-                            This is a wider card with supporting text below as a natural lead-in
-                            to additional content. This content is a little bit longer.
+                            từ 350.000 đ
                         </Card.Text>
+                        <Button variant="primary">Detail</Button>
                     </Card.Body>
                     <Card.Footer>
-                        <small className="text-muted">Last updated 3 mins ago</small>
+                        <small className="text-muted">24 tháng 7, 2024</small>
                     </Card.Footer>
                 </Card>
-
                 <Card>
-                    <Card.Img variant="top" src="holder.js/100px160" />
+                    <Card.Img variant="top" src="./Images/banh2.jpg" />
                     <Card.Body>
-                        <Card.Title>Card title</Card.Title>
+                        <Card.Title>Workshop Thủ Công</Card.Title>
                         <Card.Text>
-                            This is a wider card with supporting text below as a natural lead-in
-                            to additional content. This content is a little bit longer.
+                            từ 360.000 đ
                         </Card.Text>
+                        <Button variant="primary">Detail</Button>
                     </Card.Body>
                     <Card.Footer>
-                        <small className="text-muted">Last updated 3 mins ago</small>
+                        <small className="text-muted">14 tháng 7, 2024</small>
                     </Card.Footer>
                 </Card>
-
                 <Card>
-                    <Card.Img variant="top" src="holder.js/100px160" />
+                    <Card.Img variant="top" src="./Images/banh1.jpg" />
                     <Card.Body>
-                        <Card.Title>Card title</Card.Title>
+                        <Card.Title>Workshop Thủ Công</Card.Title>
                         <Card.Text>
-                            This is a wider card with supporting text below as a natural lead-in
-                            to additional content. This content is a little bit longer.
+                            từ 200.000 đ
                         </Card.Text>
+                        <Button variant="primary">Detail</Button>
                     </Card.Body>
                     <Card.Footer>
-                        <small className="text-muted">Last updated 3 mins ago</small>
+                        <small className="text-muted">22 tháng 7, 2024</small>
                     </Card.Footer>
                 </Card>
-
                 <Card>
-                    <Card.Img variant="top" src="holder.js/100px160" />
+                    <Card.Img variant="top" src="./Images/banh2.jpg" />
                     <Card.Body>
-                        <Card.Title>Card title</Card.Title>
+                        <Card.Title>Workshop Thủ Công</Card.Title>
                         <Card.Text>
-                            This is a wider card with supporting text below as a natural lead-in
-                            to additional content. This content is a little bit longer.
+                            từ 340.000 đ
                         </Card.Text>
+                        <Button variant="primary">Detail</Button>
                     </Card.Body>
                     <Card.Footer>
-                        <small className="text-muted">Last updated 3 mins ago</small>
+                        <small className="text-muted">11 tháng 7, 2024</small>
                     </Card.Footer>
                 </Card>
             </CardGroup>
